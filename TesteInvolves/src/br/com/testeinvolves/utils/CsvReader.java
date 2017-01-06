@@ -28,17 +28,20 @@ public class CsvReader {
 		if(comando.toLowerCase().split(" ").length >= 3 && 
 		   comando.toLowerCase().split(" ")[0].equals("filter")){
 			String cabecalho = retornaColunas();
+			String filter = "";
 			String[] colunas = cabecalho.split(",");
 			String[] comands = comando.split(" ");
-			String valor = "";
-			for(int i = 2; i < comands.length; i++){
-				if(!valor.equals("")) valor += " ";
-				valor += comands[i];
-			}
+			String valor = comando.replaceAll(comands[0] + " " + comands[1] + " ", "");
 			for(int i = 0; i < colunas.length; i++){
 				if(colunas[i].equalsIgnoreCase(comands[1])){
-					return cabecalho + "\n" + filter(i, valor);
+					filter = filter(i, valor);
+					break;
 				}
+			}
+			if(filter.isEmpty()){
+				return "Nenhum dado encontrado";
+			}else{
+				return cabecalho + "\n" + filter;
 			}
 		}
 		return "Comando inválido";
@@ -78,6 +81,7 @@ public class CsvReader {
 				for(String col : colunas){
 					if(col.equals(line[coluna])){
 						encontrado = true;
+						break;
 					}
 				}
 				if(!encontrado) colunas.add(line[coluna]);

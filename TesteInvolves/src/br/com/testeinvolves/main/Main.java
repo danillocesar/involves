@@ -9,6 +9,7 @@ public class Main {
 	public static void main(String[] args) {
 		Scanner sc = new Scanner(System.in);
 		String comando = "";
+		System.out.println("Bem vindo, Involvido!");
 		while(true){
 			System.out.println("Colunas para referência: " + CsvReader.retornaColunas());
 			System.out.println("Lista de Comandos");
@@ -18,6 +19,7 @@ public class Main {
 								+ "\nclose (fecha o programa)");
 			comando = sc.nextLine();
 			if(comando.equals("close")){
+				System.out.println("Bye Involvido!");
 				System.exit(0);
 			}else{
 				//executa comando
